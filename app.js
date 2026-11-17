@@ -39,7 +39,7 @@ function first() {
     img.alt = picture[1];
   };
   const pause = controls.querySelector('#pause-pictures');
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) pictureTimer = setInterval(showNext, 5000);
+  if (!document.body.classList.contains('easy-view') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) pictureTimer = setInterval(showNext, 5000);
   else pause.textContent = 'Play pictures';
   pause.onclick = () => {
     if (pictureTimer) { stopPictures(); pause.textContent = 'Play pictures'; }
@@ -121,3 +121,15 @@ chatForm.addEventListener('submit', event => {
   chatMessages.scrollTop = chatMessages.scrollHeight;
   chatInput.focus();
 });
+
+const easyToggle = document.querySelector('#easy-toggle');
+function setEasyView(enabled, moveFocus = false) {
+  document.body.classList.toggle('easy-view', enabled);
+  easyToggle.setAttribute('aria-pressed', String(enabled));
+  easyToggle.textContent = enabled ? 'Return to regular view' : 'Use Easy View';
+  document.querySelector('.easy-intro').hidden = !enabled;
+  try { localStorage.setItem('helping-hands-easy-view', enabled ? 'on' : 'off'); } catch (error) { /* preference is optional */ }
+  if (moveFocus && enabled) document.querySelector('#services').focus();
+}
+try { setEasyView(localStorage.getItem('helping-hands-easy-view') === 'on'); } catch (error) { setEasyView(false); }
+easyToggle.addEventListener('click', () => setEasyView(!document.body.classList.contains('easy-view'), true));
