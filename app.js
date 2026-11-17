@@ -54,3 +54,40 @@ function setHelp(open) { help.hidden = !open; toggle.setAttribute('aria-expanded
 toggle.onclick = () => setHelp(help.hidden);
 document.querySelector('.close-help').onclick = () => setHelp(false);
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && !help.hidden) setHelp(false); });
+// Practice only: these replies are fixed examples and messages stay in this page.
+const demoReplies = [
+  'Hi! This chat is still in preview. For real help, please call or text Latricia directly.',
+  'Thanks for stopping by! I can help with groceries, errands, heavy items, and medicine pickup.',
+  'Need groceries? Latricia can talk through your shopping list and preferred store with you.',
+  'For medicine pickup, please contact Latricia and your pharmacy to discuss the arrangements.',
+  'Need help with something heavy? Water, paper products, and pet food are examples of items Latricia may help with.',
+  'A family member or caregiver is welcome to call or text Latricia on your behalf.',
+  'You don’t need to use an app. You can call or text Latricia at 704-438-5683.',
+  'Latricia can discuss availability and timing with you directly.',
+  'Any fees and item costs should be discussed with Latricia before you agree to a service.',
+  'Thanks for trying the preview! No message was sent. Call or text Latricia when you’re ready for real help.'
+];
+let demoReplyIndex = 0;
+const chatForm = document.querySelector('#chat-form');
+const chatInput = document.querySelector('#chat-input');
+const chatMessages = document.querySelector('#chat-messages');
+chatForm.addEventListener('submit', event => {
+  event.preventDefault();
+  const message = chatInput.value.trim();
+  if (!message) return;
+  const userMessage = document.createElement('p');
+  userMessage.className = 'chat-user';
+  const userLabel = document.createElement('strong');
+  userLabel.textContent = 'You';
+  userMessage.append(userLabel, document.createElement('br'), document.createTextNode(message));
+  const response = document.createElement('p');
+  response.className = 'chat-reply';
+  const responseLabel = document.createElement('strong');
+  responseLabel.textContent = 'Example reply';
+  response.append(responseLabel, document.createElement('br'), document.createTextNode(demoReplies[demoReplyIndex % demoReplies.length]));
+  demoReplyIndex += 1;
+  chatMessages.append(userMessage, response);
+  chatInput.value = '';
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  chatInput.focus();
+});
