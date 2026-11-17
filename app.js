@@ -62,7 +62,7 @@ const demoReplies = [
   'For medicine pickup, please contact Latricia and your pharmacy to discuss the arrangements.',
   'Need help with something heavy? Water, paper products, and pet food are examples of items Latricia may help with.',
   'A family member or caregiver is welcome to call or text Latricia on your behalf.',
-  'You won’t need to use an app; phone and text options are planned.',
+  'The example number is 555-555-5555. It is a placeholder and cannot receive calls or texts.',
   'Latricia can discuss availability and timing with you directly.',
   'Any fees and item costs should be discussed with Latricia before you agree to a service.',
   'Thanks for trying the preview! No message was sent. Contact options will be added when they are ready.'
