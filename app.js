@@ -7,10 +7,10 @@ const descriptions = {
   'Other errands': 'Let Latricia know what kind of errand you need help with.'
 };
 const pictures = {
-  'Groceries': ['assets/service-groceries.png', 'Latricia helping an older adult with groceries'],
-  'Medicine pickup': ['assets/service-medicine-rx.png', 'Latricia helping with a pharmacy pickup'],
-  'Heavy items': ['assets/service-heavy.png', 'Latricia carrying water for an older adult'],
-  'Other errands': ['assets/service-errands-minivan.png', 'Latricia driving her minivan on an errand']
+  'Groceries': ['assets/groceries-polished.png', 'Latricia helping an older adult with groceries'],
+  'Medicine pickup': ['assets/medicine-polished.png', 'Latricia helping with a pharmacy pickup'],
+  'Heavy items': ['assets/heavy-polished.png', 'Latricia carrying water for an older adult'],
+  'Other errands': ['assets/errands-polished.png', 'Latricia driving her minivan on an errand']
 };
 let selected = '';
 let sample = {details:'', time:'', contact:'Call'};
