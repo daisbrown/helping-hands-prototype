@@ -8,7 +8,7 @@ Latricia's personal shopping and errand service serves seniors and people with d
 - Give each service a clear, direct entry point with readable type, large controls, simple steps, and an always-visible help option.
 - Explain costs before confirmation and keep family members and caregivers welcome to assist.
 - Use only illustrative prices and sample workflows until Latricia confirms actual details. Clearly label a prototype; do not imply that a request was sent or a payment processed when it was not.
-- The flyer lists 704-438-5683; confirm its use before enabling call or text links.
+- Latricia’s number has been removed from the public demo; contact options are planned.
 
 ## Open decisions
 

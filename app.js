@@ -15,7 +15,7 @@ const pictures = {
 let selected = '';
 let sample = {details:'', time:'', contact:'Call'};
 function first() {
-  content.innerHTML = `<img class="service-picture" src="${pictures[selected][0]}" alt="${pictures[selected][1]}"><h2 id="dialog-title">${selected}</h2><p>${descriptions[selected]}</p><div class="notice"><strong>Example service fee: $10</strong><p>This is a sample price. Actual fees, item costs, and availability must be confirmed with Latricia before any service.</p></div><p>Want to see how an online request could work?</p><div class="dialog-actions"><button class="button primary" id="start-request">Start an example request →</button><a class="button outline" href="tel:7044385683">Call instead</a></div>`;
+  content.innerHTML = `<img class="service-picture" src="${pictures[selected][0]}" alt="${pictures[selected][1]}"><h2 id="dialog-title">${selected}</h2><p>${descriptions[selected]}</p><div class="notice"><strong>Example service fee: $10</strong><p>This is a sample price. Actual fees, item costs, and availability must be confirmed with Latricia before any service.</p></div><p>Want to see how an online request could work?</p><div class="dialog-actions"><button class="button primary" id="start-request">Start an example request →</button></div>`;
   document.querySelector('#start-request').addEventListener('click', second);
 }
 function second() {
@@ -41,7 +41,7 @@ function third() {
   document.querySelector('#finish-request').onclick = finish;
 }
 function finish() {
-  content.innerHTML = `<h2 id="dialog-title">That’s the example!</h2><p><strong>No request, call, text, or payment was sent.</strong> This only shows what a future request could look like.</p><div class="notice"><strong>Example notification to Latricia</strong><p>A customer is interested in <span id="notice-service"></span> and prefers a <span id="notice-contact"></span>. Preferred time: <span id="notice-time"></span>.</p><p class="demo-note">This notification is a preview only. Latricia did not receive it.</p></div><p>For real help, call or text Latricia directly.</p><div class="dialog-actions"><a class="button primary" href="tel:7044385683">Call Latricia</a><a class="button outline" href="sms:7044385683">Text Latricia</a></div>`;
+  content.innerHTML = `<h2 id="dialog-title">That’s the example!</h2><p><strong>No request, call, text, or payment was sent.</strong> This only shows what a future request could look like.</p><div class="notice"><strong>Example notification to Latricia</strong><p>A customer is interested in <span id="notice-service"></span> and prefers a <span id="notice-contact"></span>. Preferred time: <span id="notice-time"></span>.</p><p class="demo-note">This notification is a preview only. Latricia did not receive it.</p></div><p>Phone and text contact options will be added later.</p>`;
   document.querySelector('#notice-service').textContent = selected.toLowerCase();
   document.querySelector('#notice-contact').textContent = sample.contact.toLowerCase();
   document.querySelector('#notice-time').textContent = sample.time || 'not selected';
@@ -56,16 +56,16 @@ document.querySelector('.close-help').onclick = () => setHelp(false);
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && !help.hidden) setHelp(false); });
 // Practice only: these replies are fixed examples and messages stay in this page.
 const demoReplies = [
-  'Hi! This chat is still in preview. For real help, please call or text Latricia directly.',
+  'Hi! This chat is still in preview. Phone and text contact options will be added later.',
   'Thanks for stopping by! I can help with groceries, errands, heavy items, and medicine pickup.',
   'Need groceries? Latricia can talk through your shopping list and preferred store with you.',
   'For medicine pickup, please contact Latricia and your pharmacy to discuss the arrangements.',
   'Need help with something heavy? Water, paper products, and pet food are examples of items Latricia may help with.',
   'A family member or caregiver is welcome to call or text Latricia on your behalf.',
-  'You don’t need to use an app. You can call or text Latricia at 704-438-5683.',
+  'You won’t need to use an app; phone and text options are planned.',
   'Latricia can discuss availability and timing with you directly.',
   'Any fees and item costs should be discussed with Latricia before you agree to a service.',
-  'Thanks for trying the preview! No message was sent. Call or text Latricia when you’re ready for real help.'
+  'Thanks for trying the preview! No message was sent. Contact options will be added when they are ready.'
 ];
 let demoReplyIndex = 0;
 const chatForm = document.querySelector('#chat-form');
