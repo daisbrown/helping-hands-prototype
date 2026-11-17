@@ -30,3 +30,4 @@
     75% { transform: rotate(-3deg); }
   }
 }
+.picture-controls{display:flex;flex-wrap:wrap;gap:.6rem;margin:.75rem 0}.picture-controls .button{font-size:.95rem;min-height:48px;padding:.6rem .9rem}

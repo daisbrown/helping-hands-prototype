@@ -9,14 +9,36 @@ const descriptions = {
 const pictures = {
   'Groceries': ['assets/groceries-polished.png', 'Latricia helping an older adult with groceries'],
   'Medicine pickup': ['assets/medicine-polished.png', 'Latricia helping with a pharmacy pickup'],
-  'Heavy items': ['assets/heavy-polished.png', 'Latricia carrying water for an older adult'],
+  'Heavy items': ['assets/heavy-water-eye-contact.png', 'Latricia carrying water for an older adult'],
   'Other errands': ['assets/errands-polished.png', 'Latricia driving her minivan on an errand']
 };
 let selected = '';
+let pictureTimer = null;
+function stopPictures() { if (pictureTimer) clearInterval(pictureTimer); pictureTimer = null; }
 let sample = {details:'', time:'', contact:'Call'};
 function first() {
   content.innerHTML = `<img class="service-picture" src="${pictures[selected][0]}" alt="${pictures[selected][1]}"><h2 id="dialog-title">${selected}</h2><p>${descriptions[selected]}</p><div class="notice"><strong>Example service fee: $10</strong><p>This is a sample price. Actual fees, item costs, and availability must be confirmed with Latricia before any service.</p></div><p>Want to see how an online request could work?</p><div class="dialog-actions"><button class="button primary" id="start-request">Start an example request →</button></div>`;
-  document.querySelector('#start-request').addEventListener('click', second);
+  if (selected === 'Heavy items') {
+    const img = content.querySelector('.service-picture');
+    const controls = document.createElement('div');
+    controls.className = 'picture-controls';
+    controls.innerHTML = '<button class="button outline" type="button" id="next-picture">Show dog picture</button><button class="button outline" type="button" id="pause-pictures">Pause pictures</button>';
+    img.after(controls);
+    let showingDog = false;
+    const showNext = () => {
+      showingDog = !showingDog;
+      img.src = showingDog ? 'assets/heavy-dog.png' : 'assets/heavy-water-eye-contact.png';
+      img.alt = showingDog ? 'Latricia carries a happy dog to an older man' : 'Latricia brings a case of water to an older woman';
+      controls.querySelector('#next-picture').textContent = showingDog ? 'Show water picture' : 'Show dog picture';
+    };
+    const pause = controls.querySelector('#pause-pictures');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduced) pictureTimer = setInterval(showNext, 8000);
+    else { pause.textContent = 'Play pictures'; }
+    controls.querySelector('#next-picture').onclick = () => { stopPictures(); pause.textContent = 'Play pictures'; showNext(); };
+    pause.onclick = () => { if (pictureTimer) { stopPictures(); pause.textContent = 'Play pictures'; } else { pictureTimer = setInterval(showNext, 8000); pause.textContent = 'Pause pictures'; } };
+  }
+  document.querySelector('#start-request').addEventListener('click', () => { stopPictures(); second(); });
 }
 function second() {
   content.innerHTML = `<h2 id="dialog-title">Tell us a little more</h2><p>This is a demonstration. Please don’t enter personal, payment, or medical information.</p><label for="sample-details">What kind of help would you like?</label><textarea id="sample-details" rows="3" placeholder="For example: help with a grocery list"></textarea><label for="sample-time">When might you need help?</label><select id="sample-time"><option value="">Choose a time</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select><fieldset class="contact-choice"><legend>How would you prefer Latricia to respond?</legend><label><input type="radio" name="contact" value="Call"> Call me</label><label><input type="radio" name="contact" value="Text"> Text me</label></fieldset><p class="demo-note">For this example, no phone number is needed and no call or text will be sent.</p><div class="dialog-actions"><button class="button outline" id="back-request">Back</button><button class="button primary" id="review-request">Review example →</button></div>`;
@@ -48,6 +70,7 @@ function finish() {
 }
 document.querySelectorAll('[data-service]').forEach(button => button.addEventListener('click', () => { selected = button.dataset.service; sample = {details:'', time:'', contact:'Call'}; first(); dialog.showModal(); }));
 document.querySelector('#close-dialog').onclick = () => dialog.close();
+dialog.addEventListener('close', stopPictures);
 dialog.addEventListener('click', e => { if(e.target === dialog) dialog.close(); });
 const help = document.querySelector('#help-panel'), toggle = document.querySelector('#help-toggle');
 function setHelp(open) { help.hidden = !open; toggle.setAttribute('aria-expanded', String(open)); if(open) help.querySelector('.close-help').focus(); else toggle.focus(); }
