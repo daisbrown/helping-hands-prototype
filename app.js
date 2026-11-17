@@ -18,26 +18,33 @@ function stopPictures() { if (pictureTimer) clearInterval(pictureTimer); picture
 let sample = {details:'', time:'', contact:'Call'};
 function first() {
   content.innerHTML = `<img class="service-picture" src="${pictures[selected][0]}" alt="${pictures[selected][1]}"><h2 id="dialog-title">${selected}</h2><p>${descriptions[selected]}</p><div class="notice"><strong>Example service fee: $10</strong><p>This is a sample price. Actual fees, item costs, and availability must be confirmed with Latricia before any service.</p></div><p>Want to see how an online request could work?</p><div class="dialog-actions"><button class="button primary" id="start-request">Start an example request →</button></div>`;
-  if (selected === 'Heavy items') {
-    const img = content.querySelector('.service-picture');
-    const controls = document.createElement('div');
-    controls.className = 'picture-controls';
-    controls.innerHTML = '<button class="button outline" type="button" id="next-picture">Show dog picture</button><button class="button outline" type="button" id="pause-pictures">Pause pictures</button>';
-    img.after(controls);
-    let showingDog = false;
-    const showNext = () => {
-      showingDog = !showingDog;
-      img.src = showingDog ? 'assets/heavy-dog.png' : 'assets/heavy-water-eye-contact.png';
-      img.alt = showingDog ? 'Latricia carries a happy dog to an older man' : 'Latricia brings a case of water to an older woman';
-      controls.querySelector('#next-picture').textContent = showingDog ? 'Show water picture' : 'Show dog picture';
-    };
-    const pause = controls.querySelector('#pause-pictures');
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduced) pictureTimer = setInterval(showNext, 8000);
-    else { pause.textContent = 'Play pictures'; }
-    controls.querySelector('#next-picture').onclick = () => { stopPictures(); pause.textContent = 'Play pictures'; showNext(); };
-    pause.onclick = () => { if (pictureTimer) { stopPictures(); pause.textContent = 'Play pictures'; } else { pictureTimer = setInterval(showNext, 8000); pause.textContent = 'Pause pictures'; } };
-  }
+  const secondPictures = {
+    'Groceries': ['assets/groceries-second.png', 'Latricia helps an older man with his grocery bags'],
+    'Medicine pickup': ['assets/medicine-second.png', 'Latricia brings a pharmacy bag to an older woman'],
+    'Heavy items': ['assets/heavy-dog.png', 'Latricia carries a happy dog to an older man'],
+    'Other errands': ['assets/errands-second.png', 'Latricia helps an older man with an errand']
+  };
+  const img = content.querySelector('.service-picture');
+  const firstPicture = pictures[selected];
+  const secondPicture = secondPictures[selected];
+  const controls = document.createElement('div');
+  controls.className = 'picture-controls';
+  controls.innerHTML = '<button class="button outline" type="button" id="pause-pictures">Pause pictures</button>';
+  img.after(controls);
+  let showingSecond = false;
+  const showNext = () => {
+    showingSecond = !showingSecond;
+    const picture = showingSecond ? secondPicture : firstPicture;
+    img.src = picture[0];
+    img.alt = picture[1];
+  };
+  const pause = controls.querySelector('#pause-pictures');
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) pictureTimer = setInterval(showNext, 5000);
+  else pause.textContent = 'Play pictures';
+  pause.onclick = () => {
+    if (pictureTimer) { stopPictures(); pause.textContent = 'Play pictures'; }
+    else { pictureTimer = setInterval(showNext, 5000); pause.textContent = 'Pause pictures'; }
+  };
   document.querySelector('#start-request').addEventListener('click', () => { stopPictures(); second(); });
 }
 function second() {
