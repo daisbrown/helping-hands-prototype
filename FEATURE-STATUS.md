@@ -19,3 +19,7 @@ Planner lists, orders, and family choices exist only in page memory and clear on
 Secure backend/database and authenticated customer, caregiver, helper, and administrator roles; verified caregiver consent and permissions; real availability and service boundaries; payment provider and applicable FSA acceptance rules; secure prescription-data handling and pharmacy authorization; identity provider/scanning integration and retention policy; live representative messaging, notifications, order persistence and real delivery updates. No real identity, card, medical, address, or payment data should be entered in this static demo.
 
 Production pricing, taxes, fees, substitutions, fulfillment, pharmacy procedures, and any pet assistance must be confirmed with Latricia. The illustrated dog scene is not confirmation of an offered service.
+
+## Checkout and placement update
+
+The request journey now shows the cost review before a simulated Square/card, Apple Pay, or Google Pay selection. These are presentation simulations, not SDK or provider integrations. No wallet opens, no payment credentials are collected, and no charge is created. Method and amount appear in the sample receipt. Cards/ID moved out of the homepage into My account; sample identification and FSA remain separate from checkout. Management preview moved to a footer disclosure. Real Square onboarding, retailer purchasing/payment arrangements, and FSA acceptance remain unresolved production work.

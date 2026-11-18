@@ -3,8 +3,7 @@ const cardsContent = document.querySelector('#cards-content');
 const sampleCards = new Set();
 const cardTypes = {
   id: {name:'Identification', detail:'Sample ID · Alex Example', mark:'ID', note:'Identification requirements would be explained before any real document is requested.'},
-  fsa: {name:'FSA card', detail:'Sample FSA card · ending 0000', mark:'FSA', note:'FSA acceptance and eligible purchases would need to be confirmed before using a real card.'},
-  payment: {name:'Debit or credit card', detail:'Sample payment card · ending 0000', mark:'CARD', note:'Real payments would use a secure payment provider. This preview cannot accept a payment.'}
+  fsa: {name:'FSA card', detail:'Sample FSA card · ending 0000', mark:'FSA', note:'FSA acceptance and eligible purchases would need to be confirmed before using a real card.'}
 };
 function cardsFocus() { const h = cardsContent.querySelector('h2'); h.tabIndex=-1; h.focus(); cardsDialog.scrollTop=0; }
 function chooseCard(){
