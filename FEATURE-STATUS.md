@@ -23,3 +23,7 @@ Production pricing, taxes, fees, substitutions, fulfillment, pharmacy procedures
 ## Checkout and placement update
 
 The request journey now shows the cost review before a simulated Square/card, Apple Pay, or Google Pay selection. These are presentation simulations, not SDK or provider integrations. No wallet opens, no payment credentials are collected, and no charge is created. Method and amount appear in the sample receipt. Cards/ID moved out of the homepage into My account; sample identification and FSA remain separate from checkout. Management preview moved to a footer disclosure. Real Square onboarding, retailer purchasing/payment arrangements, and FSA acceptance remain unresolved production work.
+
+## Location search preview
+
+The store step accepts a city or ZIP and displays the same four illustrative store suggestions with example distances. It is not geocoding, live nearby search, service-area validation, or an AI integration. Selecting a suggestion updates preferred or backup store. The typed value stays in page memory only; no device location is requested and no search is sent to a provider. A production version needs verified locations and coverage through a places/maps provider.
